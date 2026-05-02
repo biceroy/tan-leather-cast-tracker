@@ -14,7 +14,7 @@ repositories {
 }
 
 def runeLiteVersion = 'latest.release'
-def pluginMainClass = 'com.tanleathertracker.TanLeatherTrackerPlugin'
+def pluginMainClass = 'com.tanleathertracker.TanLeatherTrackerPluginTest'
 
 dependencies {
 	compileOnly group: 'net.runelite', name: 'client', version: runeLiteVersion
@@ -32,8 +32,7 @@ tasks.withType(JavaCompile).configureEach {
 	options.release.set(11)
 }
 
-
-tasks.register('runClient', JavaExec) {
+tasks.register('run', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
 	mainClass = pluginMainClass
 
@@ -62,7 +61,7 @@ tasks.register('shadowJar', Jar) {
 	exclude 'META-INF/*.RSA'
 	exclude '**/module-info.class'
 
-	group = 'build'
+	group = BasePlugin.BUILD_GROUP
 	archiveClassifier.set('shadow')
 	archiveFileName.set("${rootProject.name}-${project.version}-all.jar")
 }
